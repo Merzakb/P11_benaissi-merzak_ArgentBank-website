@@ -13,6 +13,11 @@ body {
   min-height: 100vh;
 }
 
+#root{
+    display: flex;
+    flex-direction: column;
+    flex: 1
+}
 .main {
   flex: 1;
 }
@@ -294,4 +299,5 @@ body {
 .fa {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    font-size: inherit;
 }

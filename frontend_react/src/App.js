@@ -9,7 +9,7 @@ import FooterComponent from './components/FooterComponent';
 
 function App() {
     return (
-        <div className="App">
+        <React.Fragment>
             <Router> 
                 <HeaderComponent />
                 <Routes>
@@ -19,7 +19,7 @@ function App() {
                 </Routes>
                 <FooterComponent />
             </Router>
-        </div>
+        </React.Fragment>
     )
 }
 
