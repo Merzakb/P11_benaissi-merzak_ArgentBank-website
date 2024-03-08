@@ -223,15 +223,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
   background-color: #fff;
-  width: 80%;
-  margin: 0 auto;
   flex-direction: column;
   padding: 1.5rem;
   box-sizing: border-box;
   text-align: left;
-  margin-bottom: 2rem;
 }
 
 .account-amount {
@@ -301,3 +297,94 @@ body {
     margin-right: 0.5rem;
     font-size: inherit;
 }
+/*************************************************/
+/*transactions details*/
+
+.account-transactions{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.transaction-details {
+    background-color: #00bc77;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 1rem;
+}
+
+.thead {
+    color: #fff;
+    border-bottom: 1rem solid #00bc77;
+}
+
+.tbody{
+    color: #00bc77 ;
+    background-color: #fff;
+}
+
+tbody tr{
+    height: 4rem;
+    border-bottom: 1rem solid #00bc77;
+}
+
+/* edit user info*/
+.edit-content {
+    box-sizing: border-box;
+    background-color: white;
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 1rem;
+  }
+  
+  .edit-content h1 {
+      color: #2c3e50;
+  }
+
+  .edit-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    vertical-align: baseline;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .edit-input-wrapper label {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1rem;
+    padding: 5px;
+  }
+  
+  .edit-input-wrapper input {
+    padding: 5px;
+    font-size: 1rem;
+  }
+
+  .edit-btn-wrapper{
+    display: flex;
+    column-gap: 10%;
+  }
+
+  .edit-form-button {
+    display: block;
+    padding: 8px;
+    width: 45%;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+  }
