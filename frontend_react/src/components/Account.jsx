@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import ButtonComponent from './ButtonComponent'
+import Button from './Button'
 
-const AccountComponent = ({title, amount, desc}) => {
+const Account = ({title, amount, desc}) => {
 
     const [displayTransactions, setDisplayTransactions] = useState(false)
 
@@ -18,7 +18,7 @@ const AccountComponent = ({title, amount, desc}) => {
                     <p className="account-amount-description">{desc}</p>
                 </div>
                 <div className="account-content-wrapper cta">
-                    <ButtonComponent 
+                    <Button 
                         txt="View transactions"
                         className="transaction-button"
                         func={handleDisplayTransactions}
@@ -54,4 +54,4 @@ const AccountComponent = ({title, amount, desc}) => {
     )
 }
 
-export default AccountComponent
+export default Account

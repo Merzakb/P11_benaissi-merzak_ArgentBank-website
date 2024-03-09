@@ -1,7 +1,7 @@
 import React from 'react'
 import SignInForm from '../containers/SignInForm'
 
-const SigninPage = () => {
+const SignIn = () => {
     return (
         <main className='main bg-dark'>
             <section className='sign-in-content'>
@@ -13,4 +13,4 @@ const SigninPage = () => {
     )
 }
 
-export default SigninPage
+export default SignIn

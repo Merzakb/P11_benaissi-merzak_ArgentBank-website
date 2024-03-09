@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonComponent from '../components/ButtonComponent'
+import Button from '../components/Button'
 
 const EditUserForm = () => {
     return (
@@ -17,11 +17,11 @@ const EditUserForm = () => {
                 <input type="text" id="lastname" placeholder='Jarvis' disabled ={true} />
             </div>
             <div className='edit-btn-wrapper'>
-                <ButtonComponent
+                <Button
                     txt="Save"
                     className="edit-form-button"
                 />
-                <ButtonComponent
+                <Button
                     txt="Cancel"
                     className="edit-form-button"
                 />

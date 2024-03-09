@@ -1,23 +1,23 @@
 import React  from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import HomePage from './pages/HomePage';
-import SigninPage from './pages/SigninPage';
-import DashboardPages from './pages/DashboardPages';
-import HeaderComponent from './components/HeaderComponent';
-import FooterComponent from './components/FooterComponent';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import Dashboard from './pages/Dashboard';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 
 function App() {
     return (
         <React.Fragment>
             <Router> 
-                <HeaderComponent />
+                <Header />
                 <Routes>
-                    <Route exact path="/" element={<HomePage />} />
-                    <Route path="/signin" element={<SigninPage />} />
-                    <Route path="/dashboard" element={<DashboardPages />} />
+                    <Route exact path="/" element={<Home />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
-                <FooterComponent />
+                <Footer />
             </Router>
         </React.Fragment>
     )

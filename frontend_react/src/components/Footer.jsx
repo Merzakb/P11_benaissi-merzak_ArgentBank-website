@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FooterComponent = () => {
+const Footer = () => {
   return (
     <footer className='footer'>
         <p className="footer-text">&copy; Copyright 2020 Argent Bank</p>
@@ -8,4 +8,4 @@ const FooterComponent = () => {
   )
 }
 
-export default FooterComponent
+export default Footer

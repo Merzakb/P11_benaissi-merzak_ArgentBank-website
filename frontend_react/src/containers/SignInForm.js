@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonComponent from '../components/ButtonComponent';
+import Button from '../components/Button';
 
 const SignInForm = () => {
     return (
@@ -15,7 +15,7 @@ const SignInForm = () => {
             <div className="input-remember">
                 <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
             </div>
-            <ButtonComponent 
+            <Button 
                 txt="Sign In"
                 className="sign-in-button"
             />

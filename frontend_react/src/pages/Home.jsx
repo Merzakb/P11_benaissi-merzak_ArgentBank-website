@@ -1,10 +1,10 @@
 import React from 'react'
-import FeatureComponent from '../components/FeatureComponent'
+import Feature from '../components/Feature'
 import chatIcon from "../images/icon-chat.png"
 import moneyIcon from "../images/icon-money.png"
 import securityIcon from "../images/icon-security.png"
 
-const HomePage = () => {
+const Home = () => {
   return (
     <React.Fragment>
         <main>
@@ -20,20 +20,20 @@ const HomePage = () => {
         </main>
         <section className="features">
             <h2 className="sr-only">Features</h2>
-            <FeatureComponent
+            <Feature
                 img={chatIcon}
                 alt="Chat Icon"
                 title="You are our #1 priority"
                 content="Need to talk to a representative? You can get in touch through our
                 24/7 chat or through a phone call in less than 5 minutes."
             /> 
-            <FeatureComponent
+            <Feature
                 img={moneyIcon}
                 alt="Money Icon"
                 title="More savings means higher rates"
                 content="The more you save with us, the higher your interest rate will be!"
             />
-              <FeatureComponent
+              <Feature
                 img={securityIcon}
                 alt="security Icon"
                 title="Security you can trust"
@@ -45,4 +45,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default Home
