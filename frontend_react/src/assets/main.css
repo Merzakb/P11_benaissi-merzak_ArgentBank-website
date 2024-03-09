@@ -398,3 +398,23 @@ tbody tr{
   .fa-arrow-down{
     color: #00bc77;;
   }
+
+  /**error page*/
+  .main-error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem;
+    font-size: 1.5rem;
+    color:#fff;
+   
+  }
+
+  .main-error-link{
+    color: #00bc77;;
+  }
+
+  .fa-exclamation-triangle {
+    font-size: 10rem;
+  }
