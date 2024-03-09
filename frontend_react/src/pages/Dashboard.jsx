@@ -1,36 +1,13 @@
-import React, {useState} from 'react'
-import Button from '../components/Button'
+import React from 'react'
 import Account from '../components/Account'
 import EditUserForm from '../containers/EditUserForm'
 
 const Dashboard = () => {
-    const [displayEditForm, setDisplayEditForm] = useState(false)
-
-    const handleDisplayEditForm = () => {
-        setDisplayEditForm(true)
-    }
-
     return (
         <main className='main bg-dark'>
-            <div className="header">
-                {
-                    !displayEditForm ? (
-                        <React.Fragment>
-                            <h1>Welcome back<br />Tony Jarvis!</h1>
-                            <Button 
-                                txt="Edit Name"
-                                className="edit-button"
-                                func={handleDisplayEditForm}
-                            />
-                        </React.Fragment>
-                    ) : (
-                        <div className='edit-content'>
-                            <h1>Edit user info</h1>
-                            <EditUserForm />
-                        </div>
-                    )
-                }
-            </div> 
+            <div  className="header">
+            <EditUserForm />
+            </div>
             <h2 className="sr-only">Accounts</h2>
             <Account 
                 title="Argent Bank Checking (x8349)"
