@@ -1,0 +1,183 @@
+{
+    "clientDetails": [
+        {
+            "userName" : "Iron",
+            "accounts" : [
+                {
+                    "title":"Argent Bank Checking (x8349)",
+                    "amount": 2082.79,
+                    "description":"Available Balance",
+                    "transactions" : [
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        }
+                    ]
+                },
+                {
+                    "title":"Argent Bank Savings (x6712)",
+                    "amount": 10928.42,
+                    "description":"Available Balance",
+                    "transactions" : [
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        }
+                    ]
+                },
+                {
+                    "title":"Argent Bank Credit Card (x8349)",
+                    "amount": 184.30,
+                    "description":"View EditForm",
+                    "transactions" : [
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "Golden Sun Bakey",
+                            "trans_amount": 10,
+                            "balance": 298
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "userName" : "Captain",
+            "accounts" : [
+                {
+                    "title":"Argent Bank Checking (x6349)",
+                    "amount": 1082.79,
+                    "description":"Available Balance",
+                    "transactions" : [
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        }
+                    ]
+                },
+                {
+                    "title":"Argent Bank Savings (x4712)",
+                    "amount": 8928.42,
+                    "description":"Available Balance",
+                    "transactions" : [
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        }
+                    ]
+                },
+                {
+                    "title":"Argent Bank Credit Card (x6349)",
+                    "amount": 84.30,
+                    "description":"View EditForm",
+                    "transactions" : [
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        },
+                        {
+                            "date": "2024_03_01",
+                            "trans_description": "C.C  Rive Eoile",
+                            "trans_amount": 10,
+                            "balance": 298
+                        }
+                    ]
+                }
+            ]
+        }
+       
+    ]
+}

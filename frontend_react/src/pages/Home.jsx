@@ -1,8 +1,8 @@
 import React from 'react'
 import Feature from '../components/Feature'
-import chatIcon from "../images/icon-chat.png"
-import moneyIcon from "../images/icon-money.png"
-import securityIcon from "../images/icon-security.png"
+import chatIcon from "../assets/images/icon-chat.png"
+import moneyIcon from "../assets/images/icon-money.png"
+import securityIcon from "../assets/images/icon-security.png"
 
 const Home = () => {
   return (
