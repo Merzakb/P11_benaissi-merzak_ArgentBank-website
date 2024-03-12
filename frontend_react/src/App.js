@@ -6,21 +6,24 @@ import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import NotFound from './pages/NotFound';
+import ProtectedRoutes from './routing/ProtectedRoutes';
 
 
 function App() {
     return (
         <React.Fragment>
-            <Router> 
+            <Router>
                 <Header />
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route path="/signin" element={<SignIn />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="*" element={<NotFound />} />
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path="/dashboard" element={<Dashboard />} />
+                    </Route>
                 </Routes>
                 <Footer />
-            </Router>
+            </Router> 
         </React.Fragment>
     )
 }
