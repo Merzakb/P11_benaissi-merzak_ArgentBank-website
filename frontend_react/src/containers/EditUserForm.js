@@ -1,8 +1,13 @@
 import React, {useState} from 'react'
+import { useSelector } from 'react-redux'
 import Button from '../components/Button'
 
 const EditUserForm = () => {
     const [displayEditForm, setDisplayEditForm] = useState(false)
+    const { userInfo } = useSelector((state) => state.auth);
+    const firstName = userInfo?.body.firstName;
+    const lastName = userInfo?.body.lastName;
+    const userName = userInfo?.body.userName;
 
     const handleDisplayEditForm = () => {
         setDisplayEditForm(!displayEditForm)
@@ -13,7 +18,7 @@ const EditUserForm = () => {
             {
                 !displayEditForm ? (
                     <React.Fragment>
-                        <h1>Welcome back<br />Tony Jarvis!</h1>
+                        <h1>Welcome back<br />{firstName} {lastName}!</h1>
                         <Button 
                             txt="Edit Name"
                             className="edit-button"
@@ -26,15 +31,15 @@ const EditUserForm = () => {
                         <form>
                             <div className="edit-input-wrapper">
                                 <label htmlFor="username">User name: </label>
-                                <input type="text" id="username" placeholder='Tony_T' />
+                                <input type="text" id="username" placeholder={userName} />
                             </div>
                             <div className="edit-input-wrapper">
                                 <label htmlFor="firstname">First name: </label>
-                                <input type="text" id="firstname" placeholder='Tony' disabled ={true}/>
+                                <input type="text" id="firstname" placeholder={firstName} disabled ={true}/>
                             </div>
                             <div className="edit-input-wrapper">
                                 <label htmlFor="lastname">Last name: </label>
-                                <input type="text" id="lastname" placeholder='Jarvis' disabled ={true} />
+                                <input type="text" id="lastname" placeholder={lastName} disabled ={true} />
                             </div>
                             <div className='edit-btn-wrapper'>
                                 <Button

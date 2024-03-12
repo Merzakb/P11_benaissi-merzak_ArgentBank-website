@@ -1,11 +1,15 @@
 import React from 'react'
+import { useSelector} from 'react-redux';
 import Account from '../components/Account'
 import EditUserForm from '../containers/EditUserForm'
 import accountsData from '../common/accountsData.json'
 
 const Dashboard = () => {
-    const userName = "Captain"
+    const { userInfo } = useSelector((state) => state.auth);
+    const userName = userInfo?.body.userName;
+
     const userDetails = accountsData.clientDetails.find(client => client.userName === userName);
+
     return (
         <main className='main bg-dark'>
             <div  className="header">
@@ -18,7 +22,7 @@ const Dashboard = () => {
                     title={account.title}
                     amount={account.amount}
                     desc={account.description}
-                    transactions={account.transactions} // Passer les transactions ici
+                    transactions={account.transactions} 
                 />
             ))}
         </main>
