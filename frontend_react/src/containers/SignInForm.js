@@ -1,47 +1,71 @@
-import React, {useEffect} from 'react';
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { userSignin } from "../app/authentification/authSice"
-import { useGetUserDetailsQuery } from '../app/authentification/getUserDetails';
-import Error from "../components/Error"
-
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { userSignin } from "../app/authentification/authActions";
+import Error from "../components/Error";
 
 const SignInForm = () => {
-    const {isLoading, error, token} = useSelector((state) => state.auth)
-    const dispatch = useDispatch()
-    const {register, handleSubmit} = useForm()
-    const navigate = useNavigate()
+    const { isLoading, error, token } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const { register, handleSubmit, setValue, formState: { errors }, watch } = useForm();
+    const navigate = useNavigate();
+    const [rememberMe, setRememberMe] = useState(false);
+
+    const emailValue = watch('email');
+    const passwordValue = watch('password');
 
     useEffect(() => {
-        if (token ) {
+        const rememberedEmail = localStorage.getItem('rememberedEmail');
+        const rememberedPassword = localStorage.getItem('rememberedPassword');
+        if (rememberedEmail && rememberedPassword) {
+            setValue('email', rememberedEmail);
+            setValue('password', rememberedPassword);
+        }
+    }, [setValue]);
+
+    useEffect(() => {
+        if (token) {
             navigate('/dashboard');
         }
     }, [token, navigate]);
 
     const submitForm = (data) => {
-        dispatch(userSignin(data))
+        dispatch(userSignin({ ...data, rememberMe }));
+        if (rememberMe) {
+            localStorage.setItem('rememberedEmail', data.email);
+            localStorage.setItem('rememberedPassword', data.password);
+        } else {
+            localStorage.removeItem('rememberedEmail');
+            localStorage.removeItem('rememberedPassword');
+        }
+    }
+
+    const handleRememberMeChange = (e) => {
+        setRememberMe(e.target.checked);
     }
 
     return (
         <form onSubmit={handleSubmit(submitForm)}>
             {error && <Error>{error}</Error>}
-
             <div className="input-wrapper">
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" {...register('email')} />
+            {errors.email && <Error>{errors.email.message}</Error>}
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" {...register('email', { required: 'email is required' })} />
             </div>
             <div className="input-wrapper">
+            {errors.password && <Error>{errors.password.message}</Error>}
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" {...register('password')} />
+                <input type="password" id="password" {...register('password', { required: 'password is required' })} />
             </div>
             <div className="input-remember">
-                <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
-            </div> 
+                <input type="checkbox" id="remember-me" onChange={handleRememberMeChange} />
+                <label htmlFor="remember-me">Remember me</label>
+            </div>
             <button 
                 type='submit' 
                 className='sign-in-button' 
-                disabled={isLoading}
+                disabled={isLoading || !emailValue || !passwordValue}
             >
                 {isLoading ?  "loading": 'Sign In'}
             </button>
