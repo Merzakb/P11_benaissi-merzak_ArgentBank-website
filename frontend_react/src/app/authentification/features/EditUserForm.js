@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { editUsername } from '../authActions';
 import Button from '../../../components/Button'
 import Error from '../../../components/Error'
+import Spinner from '../../../components/Spinner';
 
 const EditUserForm = () => {
     const [displayEditForm, setDisplayEditForm] = useState(false)
@@ -14,7 +15,7 @@ const EditUserForm = () => {
     const lastName = userInfo?.body.lastName;
     const userName = userInfo?.body.userName;
 
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors }} = useForm();
     const dispatch =  useDispatch()
 
     const handleDisplayEditForm = () => {
@@ -26,7 +27,8 @@ const EditUserForm = () => {
     };
 
     const submitForm = (data) => {
-        dispatch(editUsername({ userName: data['username'], token }));
+        const capitalizedUsername = data.username.charAt(0).toUpperCase() + data.username.slice(1);
+        dispatch(editUsername({ userName: capitalizedUsername, token }));
         setDisplayEditForm(!displayEditForm)
         notify()
     }
@@ -65,9 +67,9 @@ const EditUserForm = () => {
                                 <button 
                                     type='submit' 
                                     className='edit-form-button' 
-                                    disabled={isLoading || !watch('username')}
+                                    disabled={isLoading}
                                 >
-                                    {isLoading ?  "loading": 'Save'}
+                                    {isLoading ?  <Spinner /> : 'Save'}
                                 </button>
                                 <Button
                                     txt="Cancel"

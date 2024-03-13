@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSignin } from "../authActions";
 import Error from "../../../components/Error";
+import Spinner from '../../../components/Spinner';
 
 const SignInForm = () => {
     const { isLoading, error, token } = useSelector((state) => state.auth);
@@ -51,12 +52,12 @@ const SignInForm = () => {
             <div className="input-wrapper">
             {errors.email && <Error>{errors.email.message}</Error>}
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" {...register('email', { required: 'email is required' })} />
+                <input type="email" id="email" name='email' {...register('email', { required: 'email is required' })} />
             </div>
             <div className="input-wrapper">
             {errors.password && <Error>{errors.password.message}</Error>}
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" {...register('password', { required: 'password is required' })} />
+                <input type="password" id="password" name='password' {...register('password', { required: 'password is required' })} autoComplete="current-password" />
             </div>
             <div className="input-remember">
                 <input type="checkbox" id="remember-me" onChange={handleRememberMeChange} />
@@ -67,9 +68,8 @@ const SignInForm = () => {
                 className='sign-in-button' 
                 disabled={isLoading || !emailValue || !passwordValue}
             >
-                {isLoading ?  "loading": 'Sign In'}
+                {isLoading ?   <Spinner />: 'Sign In'}
             </button>
-            
         </form>
     );
 };
