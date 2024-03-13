@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
+import { userSignin, editUsername } from "./authActions";
 
 const token = localStorage.getItem('token') ?
 localStorage.getItem("token") : null
@@ -10,30 +10,6 @@ const initialState = {
     token: token,
     error: "",
 };
-
-export const userSignin = createAsyncThunk("auth/signin", async ({email, password}) => {
-    try {
-        const config = {
-            headers : {
-                'Content-Type': 'application/json',
-            }
-        };
-       
-        const { data } = await axios.post(
-            'http://localhost:3001/api/v1/user/login', 
-            { email, password },
-            config
-        )
-
-        const usertoken = data.body.token
-        localStorage.setItem("token", usertoken);
-        console.log(data);
-        return data
-    } catch(error) {
-        console.log(error.message);
-        throw error;
-    }
-});
 
 const authSlice = createSlice({
     name: "authSlice",
@@ -51,6 +27,7 @@ const authSlice = createSlice({
         }
     },
     extraReducers: builder => {
+        //for signin
         builder.addCase(userSignin.pending, state => {
             state.isLoading = true;
             state.error = null;
@@ -66,6 +43,25 @@ const authSlice = createSlice({
         builder.addCase(userSignin.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.error.message;
+        });
+
+        //for edit username
+        builder.addCase(editUsername.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
+        })
+        builder.addCase(editUsername.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.userInfo.body.userName = action.payload.body.userName; 
+            console.log( state.userInfo.body.userName);
+        })
+        builder.addCase(editUsername.rejected, (state, action) => {
+            state.isLoading = false;
+            if (action.error.message === 'Unauthorized') {
+              localStorage.removeItem('token');
+            } else {
+              state.error = action.error.message;
+            }
         });
     }
 });

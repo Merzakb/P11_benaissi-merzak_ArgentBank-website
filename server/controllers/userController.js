@@ -58,6 +58,7 @@ module.exports.updateUserProfile = async (req, res) => {
     const responseFromService = await userService.updateUserProfile(req)
     response.status = 200
     response.message = 'Successfully updated user profile data'
+    console.log(response);
     response.body = responseFromService
   } catch (error) {
     console.log('Error in updateUserProfile - userController.js')

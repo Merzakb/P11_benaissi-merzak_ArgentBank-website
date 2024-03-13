@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSignin } from "../app/authentification/authActions";
-import Error from "../components/Error";
+import { userSignin } from "../authActions";
+import Error from "../../../components/Error";
 
 const SignInForm = () => {
     const { isLoading, error, token } = useSelector((state) => state.auth);

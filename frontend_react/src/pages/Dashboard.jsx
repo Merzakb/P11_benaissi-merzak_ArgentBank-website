@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector} from 'react-redux';
 import Account from '../components/Account'
-import EditUserForm from '../containers/EditUserForm'
+import EditUserForm from '../app/authentification/features/EditUserForm'
 import accountsData from '../common/accountsData.json'
 
 const Dashboard = () => {
     const { userInfo } = useSelector((state) => state.auth);
-    const userName = userInfo?.body.userName;
+    const lastName = userInfo?.body.lastName;
 
-    const userDetails = accountsData.clientDetails.find(client => client.userName === userName);
+    const userDetails = accountsData.clientDetails.find(client => client.lastName === lastName);
 
     return (
         <main className='main bg-dark'>

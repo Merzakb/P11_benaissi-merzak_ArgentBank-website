@@ -1,20 +1,39 @@
 import React, {useState} from 'react'
-import { useSelector } from 'react-redux'
-import Button from '../components/Button'
+import { useSelector, useDispatch } from 'react-redux'
+import { useForm } from 'react-hook-form'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { editUsername } from '../authActions';
+import Button from '../../../components/Button'
+import Error from '../../../components/Error'
 
 const EditUserForm = () => {
     const [displayEditForm, setDisplayEditForm] = useState(false)
-    const { userInfo } = useSelector((state) => state.auth);
+    const { userInfo, isLoading, token } = useSelector((state) => state.auth);
     const firstName = userInfo?.body.firstName;
     const lastName = userInfo?.body.lastName;
     const userName = userInfo?.body.userName;
 
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const dispatch =  useDispatch()
+
     const handleDisplayEditForm = () => {
         setDisplayEditForm(!displayEditForm)
     }
+    
+    const  notify = () => {
+        toast.success("User name successfully updated");
+    };
+
+    const submitForm = (data) => {
+        dispatch(editUsername({ userName: data['username'], token }));
+        setDisplayEditForm(!displayEditForm)
+        notify()
+    }
 
     return (
-       <React.Fragment>
+        <React.Fragment>
+        <ToastContainer />
             {
                 !displayEditForm ? (
                     <React.Fragment>
@@ -28,10 +47,11 @@ const EditUserForm = () => {
                 ) : (
                     <div className='edit-content'>
                         <h1>Edit user info</h1>
-                        <form>
+                        <form onSubmit={handleSubmit(submitForm)}>
+                        {errors.username && <Error>{errors.username.message}</Error>}
                             <div className="edit-input-wrapper">
                                 <label htmlFor="username">User name: </label>
-                                <input type="text" id="username" placeholder={userName} />
+                                <input type="text" id="username" placeholder={userName} {...register('username', { required: 'User name is required' })}  />
                             </div>
                             <div className="edit-input-wrapper">
                                 <label htmlFor="firstname">First name: </label>
@@ -42,10 +62,13 @@ const EditUserForm = () => {
                                 <input type="text" id="lastname" placeholder={lastName} disabled ={true} />
                             </div>
                             <div className='edit-btn-wrapper'>
-                                <Button
-                                    txt="Save"
-                                    className="edit-form-button"
-                                />
+                                <button 
+                                    type='submit' 
+                                    className='edit-form-button' 
+                                    disabled={isLoading || !watch('username')}
+                                >
+                                    {isLoading ?  "loading": 'Save'}
+                                </button>
                                 <Button
                                     txt="Cancel"
                                     className="edit-form-button"
