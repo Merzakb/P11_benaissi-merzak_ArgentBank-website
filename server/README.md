@@ -63,6 +63,10 @@ Once you run the `populate-db` script, you should have two users in your databas
 
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
 
+ <!-- *************** phase 2 of the project *************** -->
+## Transaction API Documentation 
+To learn more about transactions endpoint suggestions, once you have started your local environment, you can visit: http://localhost:3001/transaction-api-docs/
+<!-- ******************************************************** -->
 ## Design Assets
 
 Static HTML and CSS has been created for most of the site and is located in: `/designs`.

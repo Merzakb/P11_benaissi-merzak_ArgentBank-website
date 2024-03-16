@@ -1,0 +1,311 @@
+openapi: 3.0.0
+info:
+  title: Bank Argent transactions API documentation
+  description: Contains suggested API endpoints for transactions routes
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001//api/v1q
+paths:
+  /accounts:
+    get:
+      summary: Returns all accounts
+      security:
+       - BearerAuth: []
+      responses:
+        '200':
+          description: Returns an array of all accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 1
+                    name:
+                      type: string
+                      example: "Argent Bank Checking (x8349)"
+                    createdAt:
+                      type: integer 
+                      format: date-time
+                      example: "2018-03-16T02:06:09.832Z"
+                    amount: 
+                      type: integer 
+                      example: 2082.79
+                    transactions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            example: 1
+                          date: 
+                            type: string
+                            format: date-time
+                            example: "2024-03-16T02:06:09.832Z"
+                          description:
+                            type: string
+                            example: "Golden Sun Bakey"
+                          amount:
+                            type: integer
+                            example: 10
+                          balance:
+                            type: integer
+                            example: 298
+        '500':
+          description: Unexpected Error
+  /accounts/:id:
+    get:
+      summary: Returns an account
+      security:
+       - BearerAuth: []
+      responses:
+        '200':
+          description: Returns an object 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 1
+                  name:
+                    type: string
+                    example: "Argent Bank Checking (x8349)"
+                  createdAt:
+                    type: integer 
+                    format: date-time
+                    example: "2018-03-16T02:06:09.832Z"
+                  amount: 
+                    type: integer 
+                    example: 2082.79
+                  transactions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          example: 1
+                        date: 
+                          type: string
+                          format: date-time
+                          example: "2024-03-16T02:06:09.832Z"
+                        description:
+                          type: string
+                          example: "Golden Sun Bakey"
+                        amount:
+                          type: integer
+                          example: 10
+                        balance:
+                          type: integer
+                          example: 298
+        '500':
+          description: Unexpected Error
+  /account/transactions:
+    get:
+      summary: Returns all transactions for an account
+      security:
+       - BearerAuth: []
+      responses:
+        '200':
+          description: Returns an array of all transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 1
+                    date: 
+                      type: string
+                      format: date-time
+                      example: "2024-03-16T02:06:09.832Z"
+                    description:
+                      type: string
+                      example: "Golden Sun Bakey"
+                    amount:
+                      type: integer
+                      example: 10
+                    balance:
+                      type: integer
+                      example: 298 
+        '500':
+          description: Unexpected Error
+  /account/transactions/:id:
+    get:
+      summary: Returns a specific transaction
+      security:
+       - BearerAuth: []
+      responses:
+        '200':
+          description: Returns an object 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 1
+                  date: 
+                    type: string
+                    format: date-time
+                    example: "2024-03-16T02:06:09.832Z"
+                  description:
+                    type: string
+                    example: "Golden Sun Bakey"
+                  amount:
+                    type: integer
+                    example: 10
+                  balance:
+                    type: integer
+                    example: 298 
+                  details:
+                    type: object
+                    properties:
+                      transaction-type : 
+                        type: string
+                        example: "Electronic"
+                      category : 
+                        type: string
+                        example: "Food"
+                      note : 
+                        type: string
+                        example: "Birth Day"
+        '500':
+          description: Unexpected Error
+  /account/transactions/:id/details:
+    get:
+      summary: Returns an object of properties
+      security:
+       - BearerAuth: []
+      responses:
+        '200':
+          description: Returns an object 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction-type : 
+                    type: string
+                    example: "Electronic"
+                  category : 
+                    type: string
+                    example: "Food"
+                  note : 
+                    type: string
+                    example: "Birth Day"
+        '500':
+          description: Unexpected Error
+    put:
+      summary: edit category of a specific transaction
+      security:
+       - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  example : "Food"
+      responses:
+        '200':
+          description: Returns an object 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  category : 
+                    type: string
+                    example: "Food"
+        '500':
+          description: Unexpected Error
+        '400':
+          description: Bad Request
+    post:
+      summary: create a note of a specific transaction
+      security:
+       - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                noteContent:
+                  type: string
+                  example : "Birth Day"
+      responses:
+        '201':
+          description: note succefully created 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id : 
+                    type: integer
+                    example: 15
+                  content:
+                    type: string
+                    example : "Birth Day"
+                  transactionId:
+                    type: integer
+                    example: 4
+                  accountId:
+                    type: integer
+                    example: 1
+        '500':
+          description: Unexpected Error
+        '400':
+          description: Bad Request
+    delete:
+      summary: delete note of a specific transaction
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: note
+          in: query
+          required: true
+          description: id of note to be deleted
+          schema:
+            type: integer
+            format: int64
+            example: 15
+      responses:
+        '200':
+          description: note Deleted
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected Behaviour
+components:
+  securitySchemes:
+   BearerAuth:
+     type: http
+     scheme: bearer
+securityDefinitions:
+  Bearer:
+    type: JWT
+    name: Authorization
+    in: header

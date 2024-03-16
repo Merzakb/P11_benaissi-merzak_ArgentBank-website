@@ -6,6 +6,9 @@ const yaml = require('yamljs')
 const swaggerDocs = yaml.load('./swagger.yaml')
 const dbConnection = require('./database/connection')
 
+/******** transactions Api swagger *********/
+const transactionsSwaggerDocs = yaml.load('./swagger-transactions/swagger.yaml')
+
 require('dotenv').config();
 
 const app = express()
@@ -28,6 +31,11 @@ app.use('/api/v1/user', require('./routes/userRoutes'))
 if (process.env.NODE_ENV !== 'production') {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 }
+
+/***********Transactions API Documentation suggestion***************/ 
+if (process.env.NODE_ENV !== 'production') {
+    app.use('/transaction-api-docs', swaggerUi.serve, swaggerUi.setup(transactionsSwaggerDocs))
+  }
 
 app.get('/', (req, res, next) => {
   res.send('Hello from my Express server v2!')
