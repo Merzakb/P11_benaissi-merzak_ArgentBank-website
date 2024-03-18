@@ -1,14 +1,21 @@
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './authentification/authSlice'
-import { getUserDetails } from './authentification/authActions';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import authReducer from './authentification/authSlice';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 const store = configureStore({
-    reducer: {
-        auth: authReducer,
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  reducer: {
+    auth: persistedReducer,
+  },
 });
 
-store.dispatch(getUserDetails(localStorage.getItem('token')));
+export const persistor = persistStore(store);
 
 export default store;

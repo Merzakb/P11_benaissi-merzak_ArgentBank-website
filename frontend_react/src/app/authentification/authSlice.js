@@ -1,15 +1,10 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 import { userSignin, getUserDetails, editUsername } from "./authActions";
-
-
-const token = localStorage.getItem('token') ?
-localStorage.getItem("token") : null
 
 const initialState = {
     isLoading : false,
     userInfo: null,
-    token: token,
+    token: null,
     error: "",
     fetchError : ""
 };
@@ -24,6 +19,7 @@ const authSlice = createSlice({
             state.userInfo = null;
             state.token = null;
             state.error = null;
+            state.fetchError = null
         },
         setUserInfo: (state, { payload } ) => {
             state.userInfo = payload;
@@ -50,7 +46,7 @@ const authSlice = createSlice({
         // for fetching user details
         builder.addCase(getUserDetails.pending, (state) => {
             state.isLoading = true;
-            state.error = null;
+            state.fetchError = null;
         });
         builder.addCase(getUserDetails.fulfilled, (state, action) => {
             state.isLoading = false;
