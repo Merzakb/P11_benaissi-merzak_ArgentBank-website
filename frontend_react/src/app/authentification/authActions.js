@@ -21,12 +21,21 @@ export const userSignin = createAsyncThunk("auth/signin",
             
             return data
         } catch (error) {
-            // return custom error message from API if any
-            if (error.response && error.response.data.message) {
-            return rejectWithValue(error.response.data.message)
-            } else {
-            return rejectWithValue(error.message)
+            // Custom error messages
+            let errorMessage = "An error occurred while signing in.";
+            if (error.response) {
+                // Error from server
+                if (error.response.status === 400) {
+                    errorMessage = "Invalid email or password.";
+                } else if (error.response.data.message) {
+                    errorMessage = error.response.data.message;
+                }
+            } else if (error.message) {
+                // Network or other error
+                errorMessage = error.message;
             }
+
+            throw new Error(errorMessage); // Throw error directly
         }
     }
 );
