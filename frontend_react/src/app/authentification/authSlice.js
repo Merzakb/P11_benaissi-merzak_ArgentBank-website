@@ -1,5 +1,7 @@
+
 import { createSlice } from "@reduxjs/toolkit";
-import { userSignin, editUsername } from "./authActions";
+import { userSignin, getUserDetails, editUsername } from "./authActions";
+
 
 const token = localStorage.getItem('token') ?
 localStorage.getItem("token") : null
@@ -9,6 +11,7 @@ const initialState = {
     userInfo: null,
     token: token,
     error: "",
+    fetchError : ""
 };
 
 const authSlice = createSlice({
@@ -27,7 +30,7 @@ const authSlice = createSlice({
         }
     },
     extraReducers: builder => {
-        //for signin
+        // for signin
         builder.addCase(userSignin.pending, state => {
             state.isLoading = true;
             state.error = null;
@@ -44,16 +47,29 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.error = action.error.message;
         });
-
-        //for edit username
-        builder.addCase(editUsername.pending, (state) => {
+        // for fetching user details
+        builder.addCase(getUserDetails.pending, (state) => {
             state.isLoading = true;
             state.error = null;
+        });
+        builder.addCase(getUserDetails.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.userInfo = action.payload; 
+            state.fetchError = null;
+        });
+        builder.addCase(getUserDetails.rejected, (state, action) => {
+            state.isLoading = false;
+            state.fetchError = action.error.message;
+        });
+
+        // for edit username
+        builder.addCase(editUsername.pending, (state) => {
+            state.isLoading = true;
+            state.fetchError = null;
         })
         builder.addCase(editUsername.fulfilled, (state, action) => {
             state.isLoading = false;
             state.userInfo.body.userName = action.payload.body.userName; 
-            console.log( state.userInfo.body.userName);
         })
         builder.addCase(editUsername.rejected, (state, action) => {
             state.isLoading = false;
@@ -62,9 +78,9 @@ const authSlice = createSlice({
             } else {
               state.error = action.error.message;
             }
-        });
+        });  
     }
 });
 
-export const {logout,  setUserInfo} =  authSlice.actions;
+export const { logout, setUserInfo } = authSlice.actions;
 export default authSlice.reducer;

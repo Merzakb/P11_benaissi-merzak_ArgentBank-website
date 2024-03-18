@@ -1,43 +1,58 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Account from '../components/Account'
-import EditUserForm from '../app/authentification/features/EditUserForm'
-import accountsData from '../common/accountsData.json'
-import { setUserInfo } from '../app/authentification/authSice';
-import { useGetUserDetailsQuery } from '../app/authentification/getUserDetails';
+import { useNavigate } from 'react-router-dom';
+import Account from '../components/Account';
+import EditUserForm from '../components/EditUserForm';
+import accountsData from '../common/accountsData.json';
+import { getUserDetails } from '../app/authentification/authActions';
+import { logout } from '../app/authentification/authSlice'; 
+import Error from '../components/Error';
 
 const Dashboard = () => {
-    const { userInfo } = useSelector((state) => state.auth);
-    const dispatch =  useDispatch()
-
-    const data = useGetUserDetailsQuery('getUserDetails')
+    const { userInfo, fetchError, token } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if (data.isSuccess) {
-            dispatch(setUserInfo(data.data));
-        }
-    }, [data.isSuccess, data.data, dispatch]);
+        dispatch(getUserDetails(token));
+    }, [dispatch, token]);
 
     const lastName = userInfo?.body.lastName;
     const userDetails = accountsData.clientDetails.find(client => client.lastName === lastName);
 
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/')
+    };
+
     return (
         <main className='main bg-dark'>
-            <div  className="header">
-            <EditUserForm />
-            </div>
-            <h2 className="sr-only">Accounts</h2>
-            {userDetails && userDetails.accounts.map(account => (
-                <Account
-                    key={account.title}
-                    title={account.title}
-                    amount={account.amount}
-                    desc={account.description}
-                    transactions={account.transactions} 
-                />
-            ))}
+            {
+                fetchError ? 
+                <>
+                    <Error>{fetchError}</Error>
+                    <button className='edit-button' onClick={handleLogout}>Logout</button>
+                </>
+                : (
+                    <>
+                        <div className="header">
+                            <EditUserForm />
+                        </div>
+                        <h2 className="sr-only">Accounts</h2>
+                        {userDetails && userDetails.accounts.map(account => (
+                            <Account
+                                key={account.title}
+                                title={account.title}
+                                amount={account.amount}
+                                desc={account.description}
+                                transactions={account.transactions} 
+                            />
+                        ))}
+                    </>
+                )
+            }
         </main>
     )
 }
 
-export default Dashboard
+export default Dashboard;

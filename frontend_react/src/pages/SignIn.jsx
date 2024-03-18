@@ -1,5 +1,5 @@
 import React from 'react'
-import SignInForm from '../app/authentification/features/SignInForm'
+import SignInForm from '../components/SignInForm'
 
 const SignIn = () => {
     return (

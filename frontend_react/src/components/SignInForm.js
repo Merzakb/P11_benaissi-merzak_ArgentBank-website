@@ -2,19 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSignin } from "../authActions";
-import Error from "../../../components/Error";
-import Spinner from '../../../components/Spinner';
+import { userSignin } from '../app/authentification/authActions';
+import Error from "./Error";
+import Spinner from './Spinner';
 
 const SignInForm = () => {
     const { isLoading, error, token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    const { register, handleSubmit, setValue, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors }} = useForm();
     const navigate = useNavigate();
     const [rememberMe, setRememberMe] = useState(false);
-
-    const emailValue = watch('email');
-    const passwordValue = watch('password');
 
     useEffect(() => {
         const rememberedEmail = localStorage.getItem('rememberedEmail');

@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { editUsername } from '../authActions';
-import Button from '../../../components/Button'
-import Error from '../../../components/Error'
-import Spinner from '../../../components/Spinner';
+import { editUsername } from '../app/authentification/authActions';
+import Button from './Button'
+import Error from './Error'
+import Spinner from './Spinner';
 
 const EditUserForm = () => {
     const [displayEditForm, setDisplayEditForm] = useState(false)

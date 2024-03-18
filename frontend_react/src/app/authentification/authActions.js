@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
+//action for signIn
 export const userSignin = createAsyncThunk("auth/signin", 
     async ({email, password}, { rejectWithValue }) => {
         try {
@@ -21,26 +23,56 @@ export const userSignin = createAsyncThunk("auth/signin",
             
             return data
         } catch (error) {
-            // Custom error messages
             let errorMessage = "An error occurred while signing in.";
+
             if (error.response) {
-                // Error from server
                 if (error.response.status === 400) {
                     errorMessage = "Invalid email or password.";
                 } else if (error.response.data.message) {
                     errorMessage = error.response.data.message;
                 }
             } else if (error.message) {
-                // Network or other error
                 errorMessage = error.message;
             }
 
-            throw new Error(errorMessage); // Throw error directly
+            throw new Error(errorMessage); 
         }
     }
 );
 
 
+//action for fetech userInfo
+export const getUserDetails = createAsyncThunk(
+  'authSlice/getUserDetails',
+  async (token, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      };
+      const response = await axios.post('http://127.0.0.1:3001/api/v1/user/profile', {}, config);
+      return response.data;
+    } catch (error) {
+        let errorMessage = "An error occurred while fetch user data.";
+
+        if (error.response) {
+            if (error.response.status === 404) {
+                errorMessage = "Server error, please try later";
+            } else if (error.response.data.message) {
+                errorMessage = error.response.data.message;
+            }
+        } else if (error.message) {
+            errorMessage = error.message;
+        }
+
+        throw new Error(errorMessage); 
+    }
+  }
+);
+
+
+//action for update userName
 export const editUsername = createAsyncThunk("auth/editUsername", 
     async ({userName, token}, { rejectWithValue }) => {
         try {
@@ -55,7 +87,6 @@ export const editUsername = createAsyncThunk("auth/editUsername",
                 {userName },
                 config
             )
-            console.log(data);
             return data
             
         } catch (error) {
