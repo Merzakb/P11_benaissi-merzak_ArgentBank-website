@@ -19,7 +19,13 @@ const SignInForm = () => {
     useEffect(() => {
         const rememberedEmail = localStorage.getItem('rememberedEmail');
         const rememberedPassword = localStorage.getItem('rememberedPassword');
-        if (rememberedEmail && rememberedPassword) {
+        const rememberedRememberMe = localStorage.getItem('rememberedRememberMe');
+
+        if (rememberedRememberMe === 'true') {
+            setRememberMe(true);
+        }
+
+        if (rememberedEmail && rememberedPassword && rememberedRememberMe === 'true') {
             setValue('email', rememberedEmail);
             setValue('password', rememberedPassword);
         }
@@ -36,9 +42,11 @@ const SignInForm = () => {
         if (rememberMe) {
             localStorage.setItem('rememberedEmail', data.email);
             localStorage.setItem('rememberedPassword', data.password);
+            localStorage.setItem('rememberedRememberMe', rememberMe);
         } else {
             localStorage.removeItem('rememberedEmail');
             localStorage.removeItem('rememberedPassword');
+            localStorage.removeItem('rememberedRememberMe');
         }
     }
 
@@ -50,23 +58,23 @@ const SignInForm = () => {
         <form onSubmit={handleSubmit(submitForm)}>
             {error && <Error>{error}</Error>}
             <div className="input-wrapper">
-            {errors.email && <Error>{errors.email.message}</Error>}
+                {errors.email && <Error>{errors.email.message}</Error>}
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" name='email' {...register('email', { required: 'email is required' })} />
             </div>
             <div className="input-wrapper">
-            {errors.password && <Error>{errors.password.message}</Error>}
+                {errors.password && <Error>{errors.password.message}</Error>}
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" name='password' {...register('password', { required: 'password is required' })} autoComplete="current-password" />
             </div>
             <div className="input-remember">
-                <input type="checkbox" id="remember-me" onChange={handleRememberMeChange} />
+                <input type="checkbox" id="remember-me" onChange={handleRememberMeChange} checked={rememberMe} />
                 <label htmlFor="remember-me">Remember me</label>
             </div>
             <button 
                 type='submit' 
                 className='sign-in-button' 
-                disabled={isLoading || !emailValue || !passwordValue}
+                disabled={ isLoading }
             >
                 {isLoading ?   <Spinner />: 'Sign In'}
             </button>
