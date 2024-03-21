@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -7,10 +7,12 @@ import { editUsername } from '../app/authentification/authActions';
 import Button from './Button'
 import Error from './Error'
 import Spinner from './Spinner';
+import useAuth  from '../hooks/useAuth';
 
 const EditUserForm = () => {
     const [displayEditForm, setDisplayEditForm] = useState(false)
-    const { userInfo, isLoading, token } = useSelector((state) => state.auth);
+    const { userInfo, isLoading, token } = useAuth()
+
     const firstName = userInfo?.body.firstName;
     const lastName = userInfo?.body.lastName;
     const userName = userInfo?.body.userName;
@@ -53,7 +55,7 @@ const EditUserForm = () => {
                         {errors.username && <Error>{errors.username.message}</Error>}
                             <div className="edit-input-wrapper">
                                 <label htmlFor="username">User name: </label>
-                                <input type="text" id="username" placeholder={userName} {...register('username', { required: 'User name is required' })}  />
+                                <input type="text" id="username" defaultValue={userName} {...register('username', { required: 'User name is required' })}  />
                             </div>
                             <div className="edit-input-wrapper">
                                 <label htmlFor="firstname">First name: </label>

@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/images/argentBankLogo.png";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../app/authentification/authSlice'; 
-import { getUserDetails } from '../app/authentification/authActions';
+import useAuth from '../hooks/useAuth';
 
 const Header = () => {
-    const { userInfo, token } = useSelector((state) => state.auth);
+    const { userInfo, isConnected } = useAuth()
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getUserDetails(token));
-    }, [dispatch, token]);
 
     const userName = userInfo?.body.userName;
 
@@ -29,7 +25,7 @@ const Header = () => {
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
             <div>
-                {token ? (
+                {isConnected ? (
                     <>
                         <Link to="/dashboard" className='main-nav-item'>
                             <i className="fa fa-user-circle"></i>

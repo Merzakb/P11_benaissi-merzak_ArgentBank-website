@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userSignin } from '../app/authentification/authActions';
+import useAuth from '../hooks/useAuth';
 import Error from "./Error";
 import Spinner from './Spinner';
 
 const SignInForm = () => {
-    const { isLoading, error, token } = useSelector((state) => state.auth);
+    const { isLoading, error, isConnected } = useAuth()
     const dispatch = useDispatch();
     const { register, handleSubmit, setValue, formState: { errors }} = useForm();
     const navigate = useNavigate();
@@ -29,10 +30,10 @@ const SignInForm = () => {
     }, [setValue]);
 
     useEffect(() => {
-        if (token) {
+        if (isConnected) {
             navigate('/dashboard');
         }
-    }, [token, navigate]);
+    }, [isConnected, navigate]);
 
     const submitForm = (data) => {
         dispatch(userSignin({ ...data, rememberMe }));
@@ -57,7 +58,7 @@ const SignInForm = () => {
             <div className="input-wrapper">
                 {errors.email && <Error>{errors.email.message}</Error>}
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name='email' {...register('email', { required: 'email is required' })} />
+                <input autoComplete='username' type="email" id="email" name='email' {...register('email', { required: 'email is required' })} />
             </div>
             <div className="input-wrapper">
                 {errors.password && <Error>{errors.password.message}</Error>}

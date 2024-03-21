@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Account from '../components/Account';
 import EditUserForm from '../components/EditUserForm';
 import accountsData from '../common/accountsData.json';
-import { getUserDetails } from '../app/authentification/authActions';
 import { logout } from '../app/authentification/authSlice'; 
+import useAuth from '../hooks/useAuth';
 import Error from '../components/Error';
 
 const Dashboard = () => {
-    const { userInfo, fetchError, token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
-    useEffect(() => {
-        dispatch(getUserDetails(token));
-    }, [dispatch, token]);
+    const { userInfo, fetchError } = useAuth()
 
     const lastName = userInfo?.body.lastName;
     const userDetails = accountsData.clientDetails.find(client => client.lastName === lastName);
