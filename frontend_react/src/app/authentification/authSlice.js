@@ -3,6 +3,7 @@ import { userSignin, getUserDetails, editUsername } from "./authActions";
 
 const initialState = {
     isLoading : false,
+    isConnected: false,
     userInfo: null,
     token: null,
     error: "",
@@ -13,17 +14,15 @@ const authSlice = createSlice({
     name: "authSlice",
     initialState : initialState,
     reducers: {
-        logout: (state) => {
-            localStorage.removeItem('token');
-            state.isLoading = false;
-            state.userInfo = null;
-            state.token = null;
-            state.error = null;
-            state.fetchError = null
+        logout: () => {
+            return {
+              ...initialState 
+            };
         },
-        setUserInfo: (state, { payload } ) => {
-            state.userInfo = payload;
-        }
+        // setUserInfo: (state, { payload } ) => {
+        //     state.userInfo = payload;
+        // }
+        
     },
     extraReducers: builder => {
         // for signin
@@ -31,18 +30,18 @@ const authSlice = createSlice({
             state.isLoading = true;
             state.error = null;
         });
-
         builder.addCase(userSignin.fulfilled, (state, { payload }) => {
             state.isLoading = false;
+            state.isConnected = true;
             state.token = payload.body.token
             state.userInfo = payload;
             state.error = null;
         });
-
         builder.addCase(userSignin.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.error.message;
         });
+
         // for fetching user details
         builder.addCase(getUserDetails.pending, (state) => {
             state.isLoading = true;
@@ -65,12 +64,15 @@ const authSlice = createSlice({
         })
         builder.addCase(editUsername.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.userInfo.body.userName = action.payload.body.userName; 
+            if (state.userInfo) {
+                state.userInfo.body.userName = action.payload.body.userName; 
+            }
         })
         builder.addCase(editUsername.rejected, (state, action) => {
             state.isLoading = false;
             if (action.error.message === 'Unauthorized') {
               localStorage.removeItem('token');
+              state.token = null
             } else {
               state.error = action.error.message;
             }

@@ -18,9 +18,6 @@ export const userSignin = createAsyncThunk("auth/signin",
                 config
             )
 
-            const usertoken = data.body.token
-            localStorage.setItem("token", usertoken);
-            
             return data
         } catch (error) {
             let errorMessage = "An error occurred while signing in.";
@@ -43,32 +40,34 @@ export const userSignin = createAsyncThunk("auth/signin",
 
 //action for fetech userInfo
 export const getUserDetails = createAsyncThunk(
-  'authSlice/getUserDetails',
-  async (token, { rejectWithValue }) => {
-    try {
-      const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      };
-      const response = await axios.post('http://127.0.0.1:3001/api/v1/user/profile', {}, config);
-      return response.data;
-    } catch (error) {
-        let errorMessage = "An error occurred while fetch user data.";
-
-        if (error.response) {
-            if (error.response.status === 404) {
-                errorMessage = "Server error, please try later";
-            } else if (error.response.data.message) {
-                errorMessage = error.response.data.message;
+    'auth/getUserDetails',
+    async (token, { rejectWithValue }) => {
+        try {
+            const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        } else if (error.message) {
-            errorMessage = error.message;
-        }
+        };
+        const response = await axios.post('http://127.0.0.1:3001/api/v1/user/profile', {}, config);
 
-        throw new Error(errorMessage); 
+        return response.data;
+
+        } catch (error) {
+            let errorMessage = "An error occurred while fetch user data.";
+
+            if (error.response) {
+                if (error.response.status === 404) {
+                    errorMessage = "Server error, please try later";
+                } else if (error.response.data.message) {
+                    errorMessage = error.response.data.message;
+                }
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+
+            throw new Error(errorMessage); 
+        }
     }
-  }
 );
 
 
