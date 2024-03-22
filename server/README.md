@@ -67,10 +67,3 @@ To learn more about how the API works, once you have started your local environm
 ## Transaction API Documentation 
 To learn more about transactions endpoint suggestions, once you have started your local environment, you can visit: http://localhost:3001/transaction-api-docs/
 <!-- ******************************************************** -->
-## Design Assets
-
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
-
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
-
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
