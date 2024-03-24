@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from "../assets/images/argentBankLogo.png";
+import Logo from "../assets/images/argentBankLogo.webp";
 import { useDispatch } from 'react-redux';
 import { logout } from '../app/authentification/authSlice'; 
 import useAuth from '../hooks/useAuth';
