@@ -24,31 +24,7 @@ paths:
                   $ref: '#/components/schemas/Account'
         '500':
           description: Unexpected Error
-  /accounts/transactions/{id}:
-    get:
-      summary: Retrieve a specific transaction for an account
-      security:
-        - BearerAuth: []
-      tags: 
-        - Transactions Module
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: ID of the transaction
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: Details of a single transaction
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Transaction'
-        '500':
-          description: Unexpected Error
-  /accounts/transactions/{id}/details:
+  /accounts/{id}/transactions/{id}/details:
     get:
       summary: Retrieve details of a single transaction
       security:
@@ -70,41 +46,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionDetails'
-        '500':
-          description: Unexpected Error
-    put:
-      summary: Edit the category of a specific transaction
-      security:
-        - BearerAuth: []
-      tags: 
-        - Transactions Module
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: ID of the transaction
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                category:
-                  type: string
-                  example: Food
-      responses:
-        '200':
-          description: Category successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TransactionCategory'
-        '400':
-          description: Bad Request
         '500':
           description: Unexpected Error
     post:
@@ -138,6 +79,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionNote'
+        '400':
+          description: Bad Request
+        '500':
+          description: Unexpected Error
+    put:
+      summary: Edit the category or note of a specific transaction
+      security:
+        - BearerAuth: []
+      tags: 
+        - Transactions Module
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the transaction
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  example: Food
+                note:
+                  type: string
+                  example: Anniversary
+      responses:
+        '200':
+          description: Transaction details successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionDetails'
         '400':
           description: Bad Request
         '500':
@@ -249,11 +228,8 @@ components:
           format: int64
           example: 15
         content:
-          type: object
-
-
-
-
+          type: string
+          example: "Cousin Birth Day"
 
 
 
