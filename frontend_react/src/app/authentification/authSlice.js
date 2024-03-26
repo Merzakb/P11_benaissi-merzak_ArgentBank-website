@@ -19,11 +19,8 @@ const authSlice = createSlice({
               ...initialState 
             };
         },
-        // setUserInfo: (state, { payload } ) => {
-        //     state.userInfo = payload;
-        // }
-        
     },
+    
     extraReducers: builder => {
         // for signin
         builder.addCase(userSignin.pending, state => {
@@ -80,5 +77,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout, setUserInfo } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;
