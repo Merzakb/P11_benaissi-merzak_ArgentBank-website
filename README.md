@@ -1,12 +1,18 @@
+![forthebadge](readme/built-with-🤍.svg)  ![forthebadge](readme/made-with-html.svg)  ![forthebadge](readme/made-with-css.svg) ![forthebadge](readme/made-with-javascript.svg) ![forthebadge](readme/made-with-react.svg) ![forthebadge](readme/made-with-redux.svg) 
+
+
 # Argent Bank
+![Logo de l'application](./designs/img/argentBankLogo.png) 
 
 This repository contains the code needed to run both the frontend and backend for Argent Bank.
 The frontend is coded in React, and the backend with Node.js, Express, and MongoDB
 
 ## Description
-
 Argent Bank is a web application for a banking agency.
-![Logo de l'application](./designs/img/argentBankLogo.png) 
+
+## Screenshots
+![App Screenshot](readme/argentbank.png)
+
 
 ## Installation
 
@@ -88,3 +94,19 @@ Static HTML and CSS has been created for most of the site and is located in: `/d
 For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
 
 And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+
+
+## Technologies :
+ ![forthebadge](readme/made-with-html.svg)  ![forthebadge](readme/made-with-css.svg) ![forthebadge](readme/made-with-javascript.svg) ![forthebadge](readme/made-with-react.svg) ![forthebadge](readme/made-with-redux.svg) 
+
+
+## Authors
+- [@Merzak](https://github.com/Merzakb)
+
+![Logo](readme/made-by-merzak.svg)
+
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://merzak-portfolio.vercel.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/merzak-b-0300b9289/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/__merzak)
